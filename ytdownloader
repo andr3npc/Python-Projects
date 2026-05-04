@@ -1,0 +1,23 @@
+from pytubefix import YouTube
+import os
+
+# Get URL from user
+link = input("Enter YouTube URL: ")
+
+try:
+    yt = YouTube(link)
+    print(f"Title: {yt.title}")
+    print(f"Views: {yt.views:,}")
+    
+    yd = yt.streams.get_highest_resolution()
+    
+    # Create download directory if it doesn't exist
+    download_path = r'C:\Users\075949631\Videos'
+    os.makedirs(download_path, exist_ok=True)
+    
+    print(f"Downloading to {download_path}...")
+    yd.download(download_path)
+    print("Download complete!")
+    
+except Exception as e:
+    print(f"Error: {e}")
